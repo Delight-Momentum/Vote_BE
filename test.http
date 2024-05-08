@@ -1,0 +1,30 @@
+### 투표 리스트 조회
+GET http://localhost:3000/api/votelist
+
+### 투표 리스트 조회 (offset, limit)
+GET http://localhost:3000/api/votelist?offset=1&limit=10
+
+### 투표 조회
+GET http://localhost:3000/api/votelist/9
+
+### 투표 생성
+POST http://localhost:3000/api/vote
+Content-Type: application/json
+
+{
+  "title": "투표를 투표하세요",
+  "contents": ["1", "2", "3", "4"],
+	"period_start": "2024-05-08T00:00:00",
+	"period_end": "2024-05-09T23:59:59",
+	"method": "one",
+	"participants_name": "private",
+	"host_name": "난 개발자",
+	"password": "1234"
+}
+
+### 투표하기
+POST http://localhost:3000/api/vote/2/1
+Content-Type: application/json
+
+### 투표 삭제
+DELETE http://localhost:3000/api/vote/8
