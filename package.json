@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon src/server.js",
     "build": "NODE_ENV=production babel src --out-dir dist --copy-files",
     "build:server": "babel src -d build",
     "build:client": "webpack --mode=production"
