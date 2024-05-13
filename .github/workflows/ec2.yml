@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.REMOTE_PRIVATE_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            cd /Vote_BE
+            cd /home/ubuntu/Vote_BE
             git pull origin main
             pm2 kill
             npm i --force
