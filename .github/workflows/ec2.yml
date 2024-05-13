@@ -1,4 +1,4 @@
-name: dev branch auto ci process script
+name: EC2 auto ci
 
 on:
   push:
