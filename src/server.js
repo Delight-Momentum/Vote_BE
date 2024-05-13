@@ -1,6 +1,6 @@
 const express = require("express");
-const voteController = require("./src/controllers/vote.controller");
-const voteListController = require("./src/controllers/votelist.controller");
+const voteController = require("./controllers/vote.controller");
+const voteListController = require("./controllers/votelist.controller");
 
 const app = express();
 
