@@ -1,4 +1,4 @@
-name: EC2 auto ci
+name: EC2 auto ci setting
 
 on:
   push:
