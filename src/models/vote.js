@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      period_start: {
+      periodStart: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      period_end: {
+      periodEnd: {
         allowNull: false,
         type: DataTypes.DATE,
       },
@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      participants_name: {
+      participantsName: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      host_name: {
+      hostName: {
         allowNull: false,
         type: DataTypes.STRING,
       },

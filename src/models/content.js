@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Content.init(
     {
-      vote_id: {
+      voteId: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.INTEGER,

@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Count.init(
     {
-      vote_id: {
+      voteId: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      content_id: {
+      contentId: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.INTEGER,

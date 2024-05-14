@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      vote_id: {
+      voteId: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,

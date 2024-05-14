@@ -14,11 +14,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      period_start: {
+      periodStart: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      period_end: {
+      periodEnd: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -26,11 +26,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      participants_name: {
+      participantsName: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      host_name: {
+      hostName: {
         allowNull: false,
         type: Sequelize.STRING,
       },

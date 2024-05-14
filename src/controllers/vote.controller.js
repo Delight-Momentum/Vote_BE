@@ -6,8 +6,8 @@ const getVote = async (req, res) => {
   const { id } = req.params;
   const vote = await Vote.findOne({ where: { id } });
   const contents = await Content.findAll({
-    where: { vote_id: id },
-    attributes: ["id", "vote_id", "content", "createdAt", "updatedAt"],
+    where: { voteId: id },
+    attributes: ["id", "voteId", "content", "createdAt", "updatedAt"],
   });
   const result = { ...vote.dataValues, contents };
 
@@ -21,12 +21,12 @@ const getVote = async (req, res) => {
 
 const createVote = async (req, res) => {
   const newVote = req.body;
-  console.log(newVote.contents[0]);
+  console.log(newVote.contents);
   const vote = await Vote.create(newVote);
   const contents = await Content.bulkCreate(
     newVote.contents.map((content) => ({
       content,
-      vote_id: vote.id,
+      voteId: vote.id,
     }))
   );
 
@@ -53,7 +53,7 @@ const editVote = async (req, res) => {
 
 const doVote = async (req, res) => {
   const { voteId, contentId } = req.params;
-  const doVote = await Count.create({ vote_id: voteId, content_id: contentId });
+  const doVote = await Count.create({ voteId: voteId, contentId: contentId });
 
   if (doVote) {
     res.send({ message: "투표가 완료되었습니다." });
