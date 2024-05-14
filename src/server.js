@@ -5,6 +5,7 @@ const voteListController = require("./controllers/votelist.controller");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/api/votelist", voteListController.getVoteList);
 
