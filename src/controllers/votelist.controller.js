@@ -14,6 +14,7 @@ const getVoteList = async (req, res) => {
     lists.map((vote, index) => ({
       ...vote.dataValues,
       participantCounts: counts[index],
+      isClosed: new Date(vote.dataValues.period_end) < new Date(),
     }))
   );
 
