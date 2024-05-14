@@ -1,5 +1,5 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
 const voteController = require("./controllers/vote.controller");
 const voteListController = require("./controllers/votelist.controller");
 
