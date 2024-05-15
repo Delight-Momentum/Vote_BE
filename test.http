@@ -5,14 +5,14 @@ GET http://localhost:3000/api/votelist
 GET http://localhost:3000/api/votelist?offset=1&limit=10
 
 ### 투표 조회
-GET http://localhost:3000/api/votelist/9
+GET http://localhost:3000/api/votelist/60
 
 ### 투표 생성
 POST http://localhost:3000/api/vote
 Content-Type: application/json
 
 {
-  "title": "투표를 투표하세요",
+  "title": "비밀번호 암호화 테스트",
   "contents": ["1", "2", "3", "4"],
 	"periodStart": "2024-05-14T00:00:00.000Z",
 	"periodEnd": "2024-05-14T22:30:59.000Z",
@@ -22,9 +22,22 @@ Content-Type: application/json
 	"password": "1234"
 }
 
-### 투표하기
-POST http://localhost:3000/api/vote/2/1
+### 투표 수정
+PUT  http://localhost:3000/api/vote/60
 Content-Type: application/json
 
+{
+	"periodEnd": "2024-05-15T22:30:59.000Z",
+  "password": "1234"
+}
+
+### 투표하기
+POST http://localhost:3000/api/vote/60/237
+
 ### 투표 삭제
-DELETE http://localhost:3000/api/vote/8
+DELETE http://localhost:3000/api/vote/54
+Content-Type: application/json
+
+{
+  "password": "1234"
+}
