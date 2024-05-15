@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      participantsName: {
+      participantNameMethod: {
         allowNull: false,
         type: DataTypes.STRING,
       },

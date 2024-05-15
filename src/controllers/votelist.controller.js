@@ -6,6 +6,17 @@ const { Vote, Count, Content } = db;
 const getVoteList = async (req, res) => {
   try {
     const { offset, limit } = req.query;
+
+    if (offset <= 0 || limit <= 0) {
+      res.status(400).send({ message: "offset과 limit은 0보다 커야 합니다." });
+      return;
+    }
+
+    if (offset && limit && offset > limit) {
+      res.status(400).send({ message: "offset은 limit보다 작아야 합니다." });
+      return;
+    }
+
     const lists = await Vote.findAll({
       attributes: {
         exclude: ["password"],

@@ -2,37 +2,42 @@
 GET http://localhost:3000/api/votelist
 
 ### 투표 리스트 조회 (offset, limit)
-GET http://localhost:3000/api/votelist?offset=1&limit=10
+GET http://localhost:3000/api/votelist?offset=1&limit=0
 
 ### 투표 조회
-GET http://localhost:3000/api/votelist/60
+GET http://localhost:3000/api/votelist/3
 
 ### 투표 생성
 POST http://localhost:3000/api/vote
 Content-Type: application/json
 
 {
-  "title": "비밀번호 암호화 테스트",
+  "title": "테스트 50",
   "contents": ["1", "2", "3", "4"],
-	"periodStart": "2024-05-14T00:00:00.000Z",
-	"periodEnd": "2024-05-14T22:30:59.000Z",
+	"periodStart": "2024-05-15T00:00:00.000",
+	"periodEnd": "2024-06-25T22:30:59.000Z",
 	"method": "one",
-	"participantsName": "private",
+	"participantNameMethod": "private",
 	"hostName": "난 개발자",
 	"password": "1234"
 }
 
 ### 투표 수정
-PUT  http://localhost:3000/api/vote/60
+PUT  http://localhost:3000/api/vote/1
 Content-Type: application/json
 
 {
-	"periodEnd": "2024-05-15T22:30:59.000Z",
+	"periodEnd": "2024-05-15T23:00:59.000Z",
   "password": "1234"
 }
 
 ### 투표하기
-POST http://localhost:3000/api/vote/60/237
+POST http://localhost:3000/api/vote/3/9
+Content-Type: application/json
+
+{
+  "participantName": "이정윤"
+}
 
 ### 투표 삭제
 DELETE http://localhost:3000/api/vote/54
