@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/votelist
 
 ### 투표 리스트 조회 (offset, limit)
-GET http://localhost:3000/api/votelist?offset=1&limit=0
+GET http://localhost:3000/api/votelist?offset=17&limit=8
 
 ### 투표 리스트 조회 (search)
 GET http://localhost:3000/api/votelist?search=테스트
