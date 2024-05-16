@@ -1,11 +1,12 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 const { convertToKoreanTime } = require("../utils/convertToKoreanTime");
 
 const { Vote, Count, Content } = db;
 
 const getVoteList = async (req, res) => {
   try {
-    const { offset, limit } = req.query;
+    const { offset, limit, search } = req.query;
 
     if (offset <= 0 || limit <= 0) {
       res.status(400).send({ message: "offset과 limit은 0보다 커야 합니다." });
@@ -17,7 +18,18 @@ const getVoteList = async (req, res) => {
       return;
     }
 
+    let voteQuery = {};
+    if (search) {
+      voteQuery = {
+        [Op.or]: {
+          title: { [Op.like]: `%${search}%` },
+          hostName: { [Op.like]: `%${search}%` },
+        },
+      };
+    }
+
     const lists = await Vote.findAll({
+      where: voteQuery,
       attributes: {
         exclude: ["password"],
       },
