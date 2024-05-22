@@ -223,7 +223,7 @@ const deleteVote = async (req, res) => {
     const { id } = req.params;
     const { password } = req.body;
 
-    if (!password) {
+    if (!password && password === "") {
       res.status(400).send({ message: "비밀번호를 입력해주세요." });
       return;
     }
