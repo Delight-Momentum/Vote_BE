@@ -3,6 +3,8 @@ const cors = require("cors");
 const voteController = require("./controllers/vote.controller");
 const voteListController = require("./controllers/votelist.controller");
 
+const PORT = 3000;
+
 const app = express();
 
 // middleware
@@ -21,6 +23,6 @@ app.put("/api/vote/:id", voteController.editVote);
 
 app.delete("/api/vote/:id", voteController.deleteVote);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

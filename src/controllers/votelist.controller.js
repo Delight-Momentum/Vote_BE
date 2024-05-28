@@ -61,6 +61,7 @@ const getVoteList = async (req, res) => {
     res.send({
       total: totalCount,
       contentTotal: result.length,
+      hasNext: totalCount > Number(offset) + Number(limit),
       votes: result,
     });
   } catch {
