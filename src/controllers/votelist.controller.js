@@ -60,6 +60,7 @@ const getVoteList = async (req, res) => {
 
     res.send({
       total: totalCount,
+      contentTotal: result.length,
       votes: result,
     });
   } catch {
