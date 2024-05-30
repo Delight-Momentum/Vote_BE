@@ -1,6 +1,12 @@
 ### 투표 리스트 조회
 GET http://localhost:3000/api/votelist
 
+### 투표 리스트 조회 - 인기 순
+GET http://localhost:3000/api/votelist?order=popular
+
+### 투표 리스트 조회 - 진행 중인 순
+GET http://localhost:3000/api/votelist?order=open
+
 ### 투표 리스트 조회 (offset, limit)
 GET http://localhost:3000/api/votelist?offset=17&limit=8
 

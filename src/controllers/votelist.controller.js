@@ -6,10 +6,17 @@ const { Vote, Count, Content } = db;
 
 const getVoteList = async (req, res) => {
   try {
-    const { offset, limit, search } = req.query;
+    const { offset, limit, search, order } = req.query;
 
     if (Number(offset) <= 0 || Number(limit) <= 0) {
       res.status(400).send({ message: "offset과 limit은 0보다 커야 합니다." });
+      return;
+    }
+
+    if (order && order !== "open" && order !== "popular") {
+      res
+        .status(400)
+        .send({ message: "order는 open 또는 popular이어야 합니다." });
       return;
     }
 
@@ -23,6 +30,10 @@ const getVoteList = async (req, res) => {
       };
     }
 
+    if (order === "open") {
+      voteQuery.periodEnd = { [Op.gt]: convertToKoreanTime(new Date()) };
+    }
+
     const totalCount = await Vote.count({
       where: voteQuery,
     });
@@ -34,6 +45,7 @@ const getVoteList = async (req, res) => {
       },
       offset: offset ? Number(offset) - 1 : 0,
       limit: limit ? Number(limit) : 100,
+      order: [["createdAt", "DESC"]],
     });
 
     const participantCounts = lists.map(async (vote) => {
@@ -57,6 +69,10 @@ const getVoteList = async (req, res) => {
         };
       })
     );
+
+    if (order === "popular") {
+      result.sort((a, b) => b.participantCounts - a.participantCounts);
+    }
 
     res.send({
       total: totalCount,
