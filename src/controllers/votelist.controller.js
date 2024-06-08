@@ -45,30 +45,30 @@ const getVoteList = async (req, res) => {
       },
       offset: offset ? Number(offset) - 1 : 0,
       limit: limit ? Number(limit) : 100,
-      order: [["createdAt", "DESC"]],
+      order: order === "popular" ? [] : [["createdAt", "DESC"]],
     });
 
-    const participantCounts = lists.map(async (vote) => {
-      const count = await Count.findAll({ where: { voteId: vote.id } });
-      return count.length;
-    });
+    const participantCounts = await Promise.all(
+      lists.map(async (vote) => {
+        const count = await Count.findAll({ where: { voteId: vote.id } });
+        return count.length;
+      })
+    );
 
     const contents = await Content.findAll();
 
-    const result = await Promise.all(participantCounts).then((counts) =>
-      lists.map((vote, index) => {
-        const convertTime = convertToKoreanTime(new Date());
+    const result = lists.map((vote, index) => {
+      const convertTime = convertToKoreanTime(new Date());
 
-        return {
-          ...vote.dataValues,
-          contents: contents
-            .filter((content) => content.voteId === vote.id)
-            .map((content) => content.content),
-          participantCounts: counts[index],
-          isClosed: vote.dataValues.periodEnd < convertTime,
-        };
-      })
-    );
+      return {
+        ...vote.dataValues,
+        contents: contents
+          .filter((content) => content.voteId === vote.id)
+          .map((content) => content.content),
+        participantCounts: participantCounts[index],
+        isClosed: vote.dataValues.periodEnd < convertTime,
+      };
+    });
 
     if (order === "popular") {
       result.sort((a, b) => b.participantCounts - a.participantCounts);
@@ -80,7 +80,8 @@ const getVoteList = async (req, res) => {
       hasNext: totalCount > Number(offset) + Number(limit),
       votes: result,
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).send({ message: "투표 리스트 조회에 실패했습니다." });
   }
 };

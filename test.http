@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/votelist
 
 ### 투표 리스트 조회 - 인기 순
-GET http://localhost:3000/api/votelist?order=popular
+GET http://localhost:3000/api/votelist?offset=1&limit=8&order=popular
 
 ### 투표 리스트 조회 - 진행 중인 순
 GET http://localhost:3000/api/votelist?order=open
@@ -21,14 +21,14 @@ POST http://localhost:3000/api/vote
 Content-Type: application/json
 
 {
-  "title": "테스트 50",
+  "title": "테스트 10",
   "contents": ["1", "2", "3", "4"],
-	"periodStart": "2024-05-15T00:00:00.000",
+	"periodStart": "2024-05-15T00:00:00.000Z",
 	"periodEnd": "2024-06-25T22:30:59.000Z",
 	"method": "one",
 	"participantNameMethod": "private",
 	"hostName": "난 개발자",
-	"password": "1234"
+	"password": "123412"
 }
 
 ### 투표 수정
