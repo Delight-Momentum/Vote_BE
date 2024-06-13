@@ -209,6 +209,8 @@ const doVote = async (req, res) => {
       contentId: contentId,
     });
 
+    await Vote.increment({ participantCounts: 1 }, { where: { id: voteId } });
+
     if (doVote) {
       res.send({ message: "투표가 완료되었습니다." });
       return;

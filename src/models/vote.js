@@ -34,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
+      participantCounts: {
+        allowNull: false,
+        defaultValue: 0,
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,

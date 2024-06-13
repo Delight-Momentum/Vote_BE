@@ -14,7 +14,7 @@ GET http://localhost:3000/api/votelist?offset=17&limit=8
 GET http://localhost:3000/api/votelist?search=테스트
 
 ### 투표 조회
-GET http://localhost:3000/api/votelist/3
+GET http://localhost:3000/api/votelist/1
 
 ### 투표 생성
 POST http://localhost:3000/api/vote
@@ -41,12 +41,12 @@ Content-Type: application/json
 }
 
 ### 투표하기
-POST http://localhost:3000/api/vote/3/9
-Content-Type: application/json
+POST http://localhost:3000/api/vote/1/1
+# Content-Type: application/json
 
-{
-  "participantName": "이정윤"
-}
+# {
+#   "participantName": "이정윤"
+# }
 
 ### 투표 삭제
 DELETE http://localhost:3000/api/vote/54

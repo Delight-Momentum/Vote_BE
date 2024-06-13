@@ -45,19 +45,18 @@ const getVoteList = async (req, res) => {
       },
       offset: offset ? Number(offset) - 1 : 0,
       limit: limit ? Number(limit) : 100,
-      order: order === "popular" ? [] : [["createdAt", "DESC"]],
+      order:
+        order === "popular"
+          ? [
+              ["participantCounts", "DESC"],
+              ["createdAt", "DESC"],
+            ]
+          : [["createdAt", "DESC"]],
     });
-
-    const participantCounts = await Promise.all(
-      lists.map(async (vote) => {
-        const count = await Count.findAll({ where: { voteId: vote.id } });
-        return count.length;
-      })
-    );
 
     const contents = await Content.findAll();
 
-    const result = lists.map((vote, index) => {
+    const result = lists.map((vote) => {
       const convertTime = convertToKoreanTime(new Date());
 
       return {
@@ -65,14 +64,9 @@ const getVoteList = async (req, res) => {
         contents: contents
           .filter((content) => content.voteId === vote.id)
           .map((content) => content.content),
-        participantCounts: participantCounts[index],
         isClosed: vote.dataValues.periodEnd < convertTime,
       };
     });
-
-    if (order === "popular") {
-      result.sort((a, b) => b.participantCounts - a.participantCounts);
-    }
 
     res.send({
       total: totalCount,

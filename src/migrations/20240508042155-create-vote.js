@@ -28,6 +28,7 @@ module.exports = {
       },
       participantNameMethod: {
         allowNull: false,
+        defaultValue: 0,
         type: Sequelize.STRING,
       },
       hostName: {
@@ -37,6 +38,10 @@ module.exports = {
       password: {
         allowNull: false,
         type: Sequelize.STRING,
+      },
+      participantCounts: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
