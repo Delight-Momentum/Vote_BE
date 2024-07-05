@@ -39,17 +39,25 @@ const getReports = async (req, res) => {
           where: { id: report.voteId },
           attributes: { exclude: ["password"] },
         });
-        const { id, voteId, reportType, isOpenReport, createdAt, updatedAt } =
-          report;
+        const {
+          id,
+          voteId,
+          reportType,
+          isOpenReport,
+          reportResult,
+          createdAt,
+          updatedAt,
+        } = report;
         return {
           voteId: voteId,
           vote,
           report: {
-            id: id,
-            reportType: reportType,
-            isOpenReport: isOpenReport,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
+            id,
+            reportType,
+            isOpenReport,
+            reportResult,
+            createdAt,
+            updatedAt,
           },
         };
       })
