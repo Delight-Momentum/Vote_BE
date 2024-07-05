@@ -151,8 +151,32 @@ const createReport = async (req, res) => {
 };
 
 const closeReport = async (req, res) => {
+  if (
+    !req.body.type &&
+    req.body.type !== "reject" &&
+    req.body.type !== "approve"
+  ) {
+    return res
+      .status(400)
+      .json({
+        message:
+          "type을 입력해주세요. type은 reject 또는 approve이어야 합니다.",
+      });
+  }
+
   try {
-    const report = await Report.findByPk(req.params.reportId);
+    if (req.body.type === "reject") {
+      try {
+        const report = await Report.findByPk(req.params.reportId);
+
+        report.isOpenReport = false;
+        await report.save();
+
+        return res.json({ message: "신고가 거절되었습니다." });
+      } catch (error) {
+        return res.status(500).json({ message: "신고 거절에 실패하였습니다." });
+      }
+    }
 
     const vote = await Vote.findByPk(req.params.voteId);
     if (!vote) {
