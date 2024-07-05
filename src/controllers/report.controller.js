@@ -1,5 +1,4 @@
 const db = require("../models");
-const vote = require("../models/vote");
 
 const { Report, Vote } = db;
 

@@ -4,7 +4,7 @@ const voteController = require("./controllers/vote.controller");
 const voteListController = require("./controllers/votelist.controller");
 const reportController = require("./controllers/report.controller");
 
-const PORT = 3001;
+const PORT = 3000;
 
 const app = express();
 
