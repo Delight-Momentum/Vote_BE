@@ -12,7 +12,7 @@ const getReports = async (req, res) => {
       return;
     }
 
-    if (order && order !== "open") {
+    if (order && order !== "open" && order !== "voteId") {
       res.status(400).send({ message: "order는 open 이어야 합니다." });
       return;
     }
@@ -27,7 +27,7 @@ const getReports = async (req, res) => {
       where: reportQuery,
       offset: offset ? Number(offset) - 1 : 0,
       limit: limit ? Number(limit) : 100,
-      attributes: { exclude: ["password"] },
+      order: order === "voteId" ? [["voteId", "ASC"]] : [["createdAt", "DESC"]],
     });
 
     if (reports.length === 0) {
@@ -40,8 +40,19 @@ const getReports = async (req, res) => {
           where: { id: report.voteId },
           attributes: { exclude: ["password"] },
         });
-
-        return { voteId: report.voteId, vote, report };
+        const { id, voteId, reportType, isOpenReport, createdAt, updatedAt } =
+          report;
+        return {
+          voteId: voteId,
+          vote,
+          report: {
+            id: id,
+            reportType: reportType,
+            isOpenReport: isOpenReport,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+          },
+        };
       })
     );
 
@@ -116,12 +127,10 @@ const createReport = async (req, res) => {
     }
 
     if (req.body.reportType !== "abuse" && req.body.reportType !== "spam") {
-      return res
-        .status(400)
-        .json({
-          message:
-            "신고 타입이 올바르지 않습니다. reportType은 abuse 또는 spam이어야 합니다.",
-        });
+      return res.status(400).json({
+        message:
+          "신고 타입이 올바르지 않습니다. reportType은 abuse 또는 spam이어야 합니다.",
+      });
     }
 
     const vote = await Vote.findByPk(req.params.voteId);

@@ -6,6 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   report.init(
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       voteId: {
         allowNull: false,
         primaryKey: true,
