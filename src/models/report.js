@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
       },
       reportResult: {
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING,
       },
     },
