@@ -21,7 +21,7 @@ POST http://localhost:3000/api/vote
 Content-Type: application/json
 
 {
-  "title": "테스트 10",
+  "title": "신고 테스트",
   "contents": ["1", "2", "3", "4"],
 	"periodStart": "2024-05-15T00:00:00.000Z",
 	"periodEnd": "2024-06-25T22:30:59.000Z",
@@ -55,3 +55,20 @@ Content-Type: application/json
 {
   "password": "1234"
 }
+
+### 신고 목록 조회
+GET http://localhost:3000/api/reports
+
+### 신고 조회
+GET http://localhost:3000/api/reports/7
+
+### 신고하기
+POST http://localhost:3000/api/report/7
+Content-Type: application/json
+
+{
+  "reportType": "abuse"
+}
+
+### 신고 승인
+PUT http://localhost:3000/api/reports/7/1

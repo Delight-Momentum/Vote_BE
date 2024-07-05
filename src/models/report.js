@@ -1,0 +1,29 @@
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class report extends Model {
+    static associate(models) {}
+  }
+  report.init(
+    {
+      voteId: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      reportType: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      isOpenReport: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+      },
+    },
+    {
+      sequelize,
+      modelName: "report",
+    }
+  );
+  return report;
+};
