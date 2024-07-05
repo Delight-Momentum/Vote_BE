@@ -156,15 +156,17 @@ const closeReport = async (req, res) => {
     req.body.type !== "reject" &&
     req.body.type !== "approve"
   ) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "type을 입력해주세요. type은 reject 또는 approve이어야 합니다.",
-      });
+    return res.status(400).json({
+      message: "type을 입력해주세요. type은 reject 또는 approve이어야 합니다.",
+    });
   }
 
   try {
+    const vote = await Vote.findByPk(req.params.voteId);
+    if (!vote) {
+      return res.status(404).json({ message: "투표를 찾을 수 없습니다." });
+    }
+
     if (req.body.type === "reject") {
       try {
         const report = await Report.findByPk(req.params.reportId);
@@ -178,10 +180,6 @@ const closeReport = async (req, res) => {
       }
     }
 
-    const vote = await Vote.findByPk(req.params.voteId);
-    if (!vote) {
-      return res.status(404).json({ message: "투표를 찾을 수 없습니다." });
-    }
     vote.destroy();
 
     const matchAllReports = await Report.findAll({
