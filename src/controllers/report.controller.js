@@ -172,6 +172,7 @@ const closeReport = async (req, res) => {
         const report = await Report.findByPk(req.params.reportId);
 
         report.isOpenReport = false;
+        report.reportResult = "reject";
         await report.save();
 
         return res.json({ message: "신고가 거절되었습니다." });
@@ -188,6 +189,7 @@ const closeReport = async (req, res) => {
 
     matchAllReports.forEach(async (report) => {
       report.isOpenReport = false;
+      report.reportResult = "approve";
       await report.save();
     });
 
